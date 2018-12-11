@@ -1,1 +1,6 @@
 /build/
+.classpath
+*.iml
+*.eml
+.idea/
+classes/

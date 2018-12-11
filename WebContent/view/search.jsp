@@ -10,9 +10,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>金融事件智能分类</title>
-    <link rel="stylesheet" href="..\.\css\bootstrap.min.css">
-    <script src="..\.\js\jquery.min.js"></script>
-    <script src="..\.\js\bootstrap.min.js"></script>
+    <link rel="stylesheet" href="..\css\bootstrap.min.css">
+    <script src="..\js\jquery.min.js"></script>
+    <script src="..\js\bootstrap.min.js"></script>
+    <script src="..\js\main.js"></script>
     <style>
     html, body {
         position: relative;
@@ -53,7 +54,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img class="navbar-brand" src="..\.\pics\陆门实验室logo_副本.png" href="#maim.jsp"style="padding:0;height:50px;">
+                    <img class="navbar-brand" src="..\pics\IRLablogo.png" href="#maim.jsp"style="padding:0;height:50px;">
                 </div>
                 <div class="collapse navbar-collapse  navbar-right" id="top-navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -62,17 +63,16 @@
 				        <li class="dropdown">
 					        <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp事件汇总&nbsp<b class="caret"></b></a>
 					        <ul class="dropdown-menu">
-						        <li><a href="#" >&nbsp新闻&nbsp</a></li>
-						        <li><a href="#" >&nbsp公告&nbsp</a></li>
-						        <li class="divider"></li>
-						        <li><a href="#" >&nbsp季报/年报&nbsp</a></li>
+						        <li><a href="newsInfo.jsp" >&nbsp新闻&nbsp</a></li>
+						        <li><a href="noticeInfo.jsp" >&nbsp公告&nbsp</a></li>
 					        </ul>
 				        </li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
 				        <div class="form-group">
-					    <input type="text" class="form-control" placeholder="Search">
+					    <input id="topSearch" type="text" class="form-control" placeholder="Search">
 				        </div>
+                        <input type="text" value="解决bootstrap与AJAX异步提交表单的冲突" hidden />
 					    <button type="button" id="search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>搜索</button>
 			        </form>
                 </div>
@@ -122,23 +122,22 @@
 </html>
 <script>
     $(function(){
-        var searchObj=null;
         $('#btSearch').click(function(){
             searchObj=$('#ipSearch').val();
             searchFinEvent();
             //console.info(searchObj);
         });//end of btSearch
-        
+
+        $('#search').click(function(){
+            searchObj=$('#topSearch').val();
+            searchFinEvent();
+            //console.info(searchObj);
+        });//end of btSearch
+
         $('.btnItem').click(function(){
             searchObj=$(this).html();
             searchFinEvent();
             //console.info(searchObj);
         });
-
-        function searchFinEvent(){
-            search_url="searchResult.jsp?searchObj="+encodeURI(encodeURI(searchObj));//拼接url
-            window.location.href=search_url;
-            console.info(searchObj);
-        }
     });
 </script>

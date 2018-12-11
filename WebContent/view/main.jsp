@@ -12,6 +12,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/swiper.jquery.min.js"></script>
     <script src="../js/swiper.min.js"></script>
+    <script src="../js/main.js"></script>
     <style>
     html, body {
         position: relative;
@@ -24,6 +25,15 @@
         color:#000;
         margin: 0;
         padding: 0;
+    }
+    .footer{
+        border-top: 1px solid #e5e5e5;
+        color: #f5f5f5;
+        padding: 19px 0;
+        background-color: #222;
+        bottom: 0;
+        width: 100%;
+        height: 200px;
     }
     .swiper-container {
         width: 100%;
@@ -81,7 +91,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img class="navbar-brand" src="..\.\pics\陆门实验室logo_副本.png" href="#maim.jsp"style="padding:0;height:50px;">
+                    <img class="navbar-brand" src="../pics/IRLablogo.png" href="#maim.jsp"style="padding:0;height:50px;">
                 </div>
                 <div class="collapse navbar-collapse  navbar-right" id="top-navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -90,17 +100,16 @@
 				        <li class="dropdown">
 					        <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp事件汇总&nbsp<b class="caret"></b></a>
 					        <ul class="dropdown-menu">
-						        <li><a href="#" >&nbsp新闻&nbsp</a></li>
-						        <li><a href="#" >&nbsp公告&nbsp</a></li>
-						        <li class="divider"></li>
-						        <li><a href="#" >&nbsp季报/年报&nbsp</a></li>
+						        <li><a href="newsInfo.jsp" >&nbsp新闻&nbsp</a></li>
+						        <li><a href="noticeInfo.jsp" >&nbsp公告&nbsp</a></li>
 					        </ul>
 				        </li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
 				        <div class="form-group">
-					    <input type="text" class="form-control" placeholder="Search">
+					    <input id="topSearch" type="text" class="form-control" placeholder="Search">
 				        </div>
+                        <input type="text" value="解决bootstrap与AJAX异步提交表单的冲突" hidden />
 					    <button type="button" id="search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>搜索</button>
 			        </form>
                 </div>
@@ -145,41 +154,45 @@
     </div>
 <!-- end-主要功能轮播 -->
 <div class="container">
-    <div class="row clearfix">
-		<div class="col-md-4 column">
-			<h2>
-				核心功能1
-			</h2>
-			<p>
-				这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述
-			</p>
-			<p>
-				 <a class="btn" href="#">查看详情 »</a>
-			</p>
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				核心功能2
-			</h2>
-			<p>
-				这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述
-			</p>
-			<p>
-				 <a class="btn" href="#">查看详情 »</a>
-			</p>
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				核心功能3
-			</h2>
-			<p>
-				这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述。这里是核心功能描述
-			</p>
-			<p>
-				 <a class="btn" href="#">查看详情 »</a>
-			</p>
-		</div>
-	</div>
+
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row footer-top">
+            <div class="col-sm-6 col-lg-6">
+                <h4>武汉大学信息管理学院</h4>
+                <p>信息检索与知识挖掘研究所</p>
+                <p><span class="glyphicon glyphicon-map-marker"></span>湖北省武汉市武昌区珞珈山武汉大学信息管理学院611室</p>
+            </div>
+            <div class="col-sm-6  col-lg-5 col-lg-offset-1">
+                <div class="row about">
+                    <div class="col-xs-3">
+                        <h4>机构简介</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a style='color:#fff' href="http://ir.whu.edu.cn/"><span class="glyphicon glyphicon-link"></span>&nbsp关于我们</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>联系方式</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="glyphicon glyphicon-envelope">&nbsp电子邮件:weilu@whu.edu.cn</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row footer-bottom">
+            <ul class="list-inline text-center">
+                <li>Copyright &copy;2017. 武汉大学信息检索与知识挖掘研究所  All Rights Reserved.</li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>
@@ -199,6 +212,13 @@
     });
     $('#search').click(function(){
         // 输入的内容传递给后台，并跳转到检索结果界面
+        searchObj=$('#topSearch').val();
+        searchFinEvent();
+    });
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $('#search').click();
+        }
     });
     })
 </script>
